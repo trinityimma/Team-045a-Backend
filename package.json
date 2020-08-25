@@ -1,0 +1,25 @@
+{
+  "name": "fundme",
+  "version": "1.0.0",
+  "description": "A project to help people get the funding they need for their projects",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trinityimma/Team-045a-Backend.git"
+  },
+  "author": "Team-045a",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trinityimma/Team-045a-Backend/issues"
+  },
+  "homepage": "https://github.com/trinityimma/Team-045a-Backend#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.10.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  }
+}
