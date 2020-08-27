@@ -1,8 +1,6 @@
-# Team-045a-Backend
-
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2418e75d5b384b39902c3a77e34de1fa)](https://app.codacy.com/gh/BuildForSDGCohort2/Team-045a-Backend?utm_source=github.com&utm_medium=referral&utm_content=BuildForSDGCohort2/Team-045a-Backend&utm_campaign=Badge_Grade_Settings)
 
-# TalentPool
+# Team-045a-Backend
 
 Please before you push your codes to the repository make sure you pull from the repository, so the changes that have been made can be reflected on your local machine, for us to avoid merge conflicts use the git command line
    
@@ -18,7 +16,7 @@ This process here should be able to guide you on how to contribute effectively t
 
 * **Fork** the repository to generate a copy of your own.
 
-* Clone the repository.
+* **Clone** the repository.
 
    ```
     git clone https://github.com/Olanetsoft/TalentPool.git
@@ -34,12 +32,13 @@ This process here should be able to guide you on how to contribute effectively t
 
 * To start the project locally, 
 
-* Create your own .env using .env.example as reference then and your MONGO URL string to the field **DATABASE** and
+* Create your own .env using .env.example as reference then and your MONGO URL string to the field **DATABASE** 
 
  **RUN**:
 
     ```
     npm run dev
+
     ```
 
 * Create a branch FROM develop, ALWAYS CREATE YOUR BRANCH FROM DEVELOP,
@@ -71,7 +70,7 @@ Write good commit messages, this is very important, so people reviewing can know
 
     ```
     git push origin (name-of-branch)
-    
+
     ```
 
 Make your Pull request from that branch of your repo to the develop branch of this (BuildForSDGCohort2/Team-045a-Backend) repo and wait for it to be merged.
