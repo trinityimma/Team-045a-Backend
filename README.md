@@ -17,6 +17,7 @@ This process here should be able to guide you on how to contribute effectively t
 *   **Fork** the repository to generate a copy of your own.
 
 *   **Clone** the repository.
+
         ```
         git clone https://github.com/Olanetsoft/TalentPool.git
         ```
@@ -39,7 +40,8 @@ This process here should be able to guide you on how to contribute effectively t
         ```
 
 *   Create a branch FROM develop, ALWAYS CREATE YOUR BRANCH FROM DEVELOP,
-the branch name should at least be meaningful,  **make sure you have one story per branch (one(1) story ===  one(1) branch)** 
+the branch name should at least be meaningful,  **make sure you have one story per branch (one(1) story ===  one(1) branch)**
+
     ```
     git checkout -b (name-of-branch)
     ```
@@ -48,7 +50,6 @@ the branch name should at least be meaningful,  **make sure you have one story p
 
     ```
     git pull upstream develop
-    
     ```
 
 Consistently pull from the develop branch to avoid not getting your pull request merged and to avoid conflicts.
