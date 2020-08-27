@@ -14,7 +14,7 @@ This process here should be able to guide you on how to contribute effectively t
 
 ### Develop is the default branch.
 
-* All occurrences of Olanetsoft will be your own github username
+* All occurrences of **Olanetsoft** will be your own github username
 
 * **Fork** the repository to generate a copy of your own.
 
@@ -22,23 +22,40 @@ This process here should be able to guide you on how to contribute effectively t
 
    ```
     git clone https://github.com/Olanetsoft/TalentPool.git
+
    ```
     
 * Make the original BuildForSDGCohort2/Team-045a-Backend repo the remote upstream (at upstream)
+
     ```
     git remote add upstream https://github.com/BuildForSDGCohort2/Team-045a-Backend.git
+    
     ```
+
+* To start the project locally, 
+
+* Create your own .env using .env.example as reference then and your MONGO URL string to the field **DATABASE** and
+
+ **RUN**:
+
+    ```
+    npm run dev
+    ```
+
 * Create a branch FROM develop, ALWAYS CREATE YOUR BRANCH FROM DEVELOP,
 the branch name should at least be meaningful,  **make sure you have one story per branch (one(1) story ===  one(1) branch)** 
 
     ```
     git checkout -b (name-of-branch)
+
     ```
 
 * After changes have been made, **RUN**:
     ```
     git pull upstream develop
+
     ```
+
 Consistently pull from the develop branch to avoid not getting your pull request merged and to avoid conflicts.
 This way you can resolve conflicts from your local computer even before pushing always check what branch you are on when making changes
  
@@ -46,6 +63,7 @@ This way you can resolve conflicts from your local computer even before pushing 
 
    ``` 
    git commit -m "your message"
+
    ```
 Write good commit messages, this is very important, so people reviewing can know what your fix, feature e.t.c. is doing
 
@@ -53,7 +71,8 @@ Write good commit messages, this is very important, so people reviewing can know
 
     ```
     git push origin (name-of-branch)
-   ```
+    
+    ```
 
 Make your Pull request from that branch of your repo to the develop branch of this (BuildForSDGCohort2/Team-045a-Backend) repo and wait for it to be merged.
 
