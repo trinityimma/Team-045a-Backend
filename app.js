@@ -1,7 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
 
-
 // Require all routes
 const indexRouter = require('./routes');
 

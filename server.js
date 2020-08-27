@@ -14,7 +14,7 @@ dotenv.config({ path: './.env' });
 const app = require('./app');
 
 
-mongoose.connect(process.env.DATABASE, {
+mongoose.connect("mongodb://localhost/fundme", {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
