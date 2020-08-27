@@ -18,17 +18,15 @@ This process here should be able to guide you on how to contribute effectively t
 
 *   **Clone** the repository.
 
-            ```
+        ```
         git clone https://github.com/Olanetsoft/TalentPool.git
-
-            ```
+        ```
     
 
 *   Make the original BuildForSDGCohort2/Team-045a-Backend repo the remote upstream (at upstream)
 
         ```
         git remote add upstream https://github.com/BuildForSDGCohort2/Team-045a-Backend.git
-
         ```
 
 *   To start the project locally, 
@@ -36,9 +34,9 @@ This process here should be able to guide you on how to contribute effectively t
 *   Create your own .env using .env.example as reference then and your MONGO URL string to the field **DATABASE** 
 
     **RUN**
+
         ```
         npm run dev
-
         ```
 
 *   Create a branch FROM develop, ALWAYS CREATE YOUR BRANCH FROM DEVELOP,
@@ -46,13 +44,12 @@ the branch name should at least be meaningful,  **make sure you have one story p
 
     ```
     git checkout -b (name-of-branch)
-
     ```
 
 *   After changes have been made, **RUN**:
+
     ```
     git pull upstream develop
-
     ```
 
 Consistently pull from the develop branch to avoid not getting your pull request merged and to avoid conflicts.
@@ -62,7 +59,6 @@ This way you can resolve conflicts from your local computer even before pushing 
 
     ``` 
     git commit -m "your message"
-
     ```
     Write good commit messages, this is very important, so people reviewing can know what your fix, feature e.t.c. is doing
 
@@ -70,7 +66,6 @@ This way you can resolve conflicts from your local computer even before pushing 
 
     ```
     git push origin (name-of-branch)
-
     ```
 
     Make your Pull request from that branch of your repo to the develop branch of this (BuildForSDGCohort2/Team-045a-Backend) repo and wait for it to be merged.
@@ -94,15 +89,21 @@ The type is contained within the title and can be one of these types:
 
 *   fix: a bug fix
 
+
 *   docs: changes to documentation
+
 
 *   style: formatting, missing semi colons, etc; no code change
 
+
 *   refactor: refactoring production code
+
 
 *   test: adding tests, refactoring test; no production code change
 
+
 *   chore: updating build tasks, package manager configs, etc; no production code change
+
 
 **An example of a good commit message**
     
@@ -116,10 +117,13 @@ Are there side effects or other unintuitive consequences of this change? Here's 
 
 *   Further paragraphs come after blank lines.
 
-    *  Bullet points are okay, too
 
-    *  Typically a hyphen or asterisk is used for the bullet, preceded
+*   Bullet points are okay, too
+
+
+*   Typically a hyphen or asterisk is used for the bullet, preceded
     by a single space, with blank lines in between, but conventions vary here
+
 
 *   If you use an issue tracker, put references to them at the bottom,
 like this:
