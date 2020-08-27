@@ -34,7 +34,7 @@ This process here should be able to guide you on how to contribute effectively t
 
 * Create your own .env using .env.example as reference then and your MONGO URL string to the field **DATABASE** 
 
- **RUN**:
+ **RUN**
 
     ```
     npm run dev
