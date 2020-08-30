@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please provide a password'],
         minlength: [8, 'Please provide a password with minimum length of 8'],
-        // make the password never show up for any get request
+        // Make the password never show up for any get request
         select: false
     },
     passwordChangedAt: Date,
@@ -50,7 +50,14 @@ const userSchema = new mongoose.Schema({
     active: {
         type: Boolean,
         default: true,
+    },
+    campaign: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Campaign',
+        required: [true, 'A campaign is unique to a User']
     }
+}, {
+    timestamps: true
 }
 );
 
