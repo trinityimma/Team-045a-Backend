@@ -1,15 +1,13 @@
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
-const bodyParser = require('body-parser');
+
 
 // Require all routes
 const indexRouter = require('./routes/index');
 
 const app = express();
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
 
 // Middleware registered
 // Body parser, reading data from body into req.body
