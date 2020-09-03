@@ -4,7 +4,7 @@ const schema = mongoose.Schema;
 const campaignSchema = new schema({
 	campaign_name: {type: String},
 	funds_needed: {type: Number},
-	campaign_story: {type: String},
+	campaign_story: {type: String, unique: true},
 	payment_info:{ type: Schema.Types.ObjectId, ref:'User'}
 })
 
