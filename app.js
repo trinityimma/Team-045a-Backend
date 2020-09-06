@@ -4,7 +4,7 @@ const morgan = require('morgan');
 
 
 // Require all routes
-const indexRouter = require('./routes/index');
+const indexRouter = require('./routes');
 
 const app = express();
 
@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 // ************ REGISTER ROUTES HERE ********** //
 
-app.use('/',indexRouter);
+app.use(indexRouter);
 
 // ************ END ROUTE REGISTRATION ********** //
 
