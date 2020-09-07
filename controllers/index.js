@@ -61,11 +61,11 @@ exports.getLogin = (req, res)=>{
 }
 
 exports.postLogin = (req, res)=>{
-    User.find({email: req.body.email}, (err, user)=>{
+    User.find({email: req.body.email}, (error, user)=>{
       if(user === undefined || user.length < 1){
         res.status(401).json({message:"Your email does not exist"})
       }else {
-        let password = user[0].password;
+        const [{password}] = user;
         bcrypt.compare(req.body.password, password, (err, passwordMatch)=>{
           if (passwordMatch === true){
             jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET);
