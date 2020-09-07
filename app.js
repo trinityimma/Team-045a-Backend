@@ -8,6 +8,7 @@ const indexRouter = require('./routes');
 
 const app = express();
 
+
 // Middleware registered
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
