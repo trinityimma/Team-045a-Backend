@@ -6,12 +6,12 @@ const controllers = require('../controllers/index');
 
 router.get('/', home);
 
-router.get('/register',controllers.register_get);
+router.get('/register',controllers.getRegister);
 
-router.post('/register', controllers.register_post);
+router.post('/register', controllers.postRegister);
 
-router.get('/login', controllers.login_get);
+router.get('/login', controllers.getLogin);
 
-router.post('/login', controllers.login_post);
+router.post('/login', controllers.postLogin);
 
 module.exports = router;
