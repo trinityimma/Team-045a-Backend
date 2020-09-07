@@ -1,26 +1,26 @@
-var User = require('../models/user');
-var Campaign = require('../models/campaign');
 const {body, validationResult} = require('express-validator');
 const bcrypt = require('bcrypt');
-const middlewares = require('../middleware/index');
 const jwt = require('jsonwebtoken');
+const User = require('../models/user');
 
 const saltrounds = 10;
+let errors;
+let user;
 
 
 exports.home = (req, res) => {
     res.send("Hello 👋 Welcome to Team-045a-Backend!");
 };
 
-exports.register_get = (req, res)=>{
+exports.getRegister = (req, res)=>{
   res.render('register', {title: "Register"});
-}
+};
 
-exports.register_post = [
+exports.postRegister = [
 
-    body('first_name', 'first name cannot be less than one and must contain alphanumeric characters').isLength({min: 3})
+    body('firstName', 'first name cannot be less than one and must contain alphanumeric characters').isLength({min: 3})
     .isAlphanumeric().trim(),
-    body('last_name', 'Email name cannot be less than one and must contain alphanumeric characters').isLength({min: 3})
+    body('lastName', 'Email name cannot be less than one and must contain alphanumeric characters').isLength({min: 3})
     .isAlphanumeric().trim(),
     body('email', 'Must be a valid email').isEmail(),
     body('password', 'Password must not be less than 8 characters').isLength({min: 8}),
@@ -34,42 +34,38 @@ exports.register_post = [
     //procesing the request
     (req, res)=>{
 
-	var errors = validationResult(req);
-    if(!errors.isEmpty()){
-    	console.log(errors);
-    	res.render('register', {errors: errors.array()});
+	   errors = validationResult(req);
+    if (!errors.isEmpty()){
+    	res.status(403).json({message: "Validation failed, please register again"});
     }else{
+          const {firstName, lastName, email, password} = req.body;
 
-          bcrypt.hash('req.body.password', saltrounds, (err, hash)=>{
-            
-          var user = new User({
-         first_name: req.body.first_name,
-         last_name: req.body.last_name,
-         email: req.body.email,
-         password: hash        
-      });
+          bcrypt.hash(password, saltrounds, (err, hash)=>{
+
+         user = new User({ firstName: firstName, lastName: lastName, email: email, password: hash});
 
           user.save((err)=>{
-         if(err){return next(err)}
+         if(err){res.status(403).json({message: "Can't create user"})}
           else{res.redirect('/');}
       })
 
-      })//End of the bcrypt hash
+   })//End of the bcrypt hash
+
     }
 }
 
 ];
 
-exports.login_get = (req, res)=>{
+exports.getLogin = (req, res)=>{
   res.render('login', {title: "Login"});
 }
 
-exports.login_post = (req, res)=>{
+exports.postLogin = (req, res)=>{
     User.find({email: req.body.email}, (err, user)=>{
-      if(user == undefined || user.length < 1){
+      if(user === undefined || user.length < 1){
         res.status(401).json({message:"Your email does not exist"})
       }else {
-        var user = user[0];
+        user = user[0];
         bcrypt.compare(req.body.password, user.password, (err, passwordMatch)=>{
           if (passwordMatch === true){
             jwt.sign({user: user}, process.env.ACCESS_TOKEN_SECRET);
@@ -82,4 +78,11 @@ exports.login_post = (req, res)=>{
 
   })
 
+}/*Endpoint for donor signup*/
+
+exports.getDonor = (req, res)=>{
+    res.render('donor_signup', {title: "Donate!"})
+}
+
+exports.postDonor = (req, res, next)=>{
 }
