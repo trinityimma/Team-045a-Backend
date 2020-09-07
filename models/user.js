@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     },
     phoneNumber: {
         type: String,
-        //required: [true, 'please provide a phone number'],
+        // required: [true, 'please provide a phone number'],
     },
     email: {
         type: String,
@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Please provide a password'],
         minlength: [8, 'Please provide a password with minimum length of 8'],
         // Make the password never show up for any get request
-        //select: false
+        // select: false
     },
     passwordChangedAt: Date,
     passwordResetToken: String,
@@ -54,7 +54,7 @@ const userSchema = new mongoose.Schema({
     campaign: {
         type: mongoose.Schema.ObjectId,
         ref: 'Campaign',
-        //required: [true, 'A campaign is unique to a User']
+        // required: [true, 'A campaign is unique to a User']
     }
 }, {
     timestamps: true

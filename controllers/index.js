@@ -4,8 +4,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 const saltrounds = 10;
-let errors;
-let user;
 
 
 exports.home = (req, res) => {
@@ -31,25 +29,27 @@ exports.postRegister = [
        return true;
     }),
 
-    //procesing the request
+    // procesing the request
     (req, res)=>{
 
-	   errors = validationResult(req);
+	   const errors = validationResult(req);
     if (!errors.isEmpty()){
     	res.status(403).json({message: "Validation failed, please register again"});
     }else{
           const {firstName, lastName, email, password} = req.body;
 
-          bcrypt.hash(password, saltrounds, (err, hash)=>{
-
-         user = new User({ firstName: firstName, lastName: lastName, email: email, password: hash});
+          bcrypt.hash(password, saltrounds, (error, hash)=>{
+          	if(error){
+          		res.status().json({message: "Password hash failed"})
+          	}
+            const user = new User({ firstName, lastName, email, password: hash});
 
           user.save((err)=>{
          if(err){res.status(403).json({message: "Can't create user"})}
           else{res.redirect('/');}
       })
 
-   })//End of the bcrypt hash
+   })// End of the bcrypt hash
 
     }
 }
@@ -65,10 +65,10 @@ exports.postLogin = (req, res)=>{
       if(user === undefined || user.length < 1){
         res.status(401).json({message:"Your email does not exist"})
       }else {
-        user = user[0];
-        bcrypt.compare(req.body.password, user.password, (err, passwordMatch)=>{
+        let password = user[0].password;
+        bcrypt.compare(req.body.password, password, (err, passwordMatch)=>{
           if (passwordMatch === true){
-            jwt.sign({user: user}, process.env.ACCESS_TOKEN_SECRET);
+            jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET);
             res.redirect('/');
           }else{
               res.status(403).json({message: "Password does not match"})
@@ -78,11 +78,4 @@ exports.postLogin = (req, res)=>{
 
   })
 
-}/*Endpoint for donor signup*/
-
-exports.getDonor = (req, res)=>{
-    res.render('donor_signup', {title: "Donate!"})
-}
-
-exports.postDonor = (req, res, next)=>{
-}
+}/* Endpoint for donor signup */
