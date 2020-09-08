@@ -1,62 +1,55 @@
-var mongoose = require("mongoose"),
- marked = require("marked"),
- slugify = require("slugify"),
- createDomPurify = require("dompurify"),
- { JSDOM } = require("jsdom"),
- dompurify = createDomPurify(new JSDOM().window);
+const mongoose = require('mongoose');
+const slugify = require('slugify');
 
+// Creating campaign model
 const campaignSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
-    },
-    image: {
-        type: String
-    },
-    imageId: {
-        type: String
-    },
-    caption: {
-        type: String
+        required: [true, 'A campaign must have a title'],
+        unique: true,
+        trim: true,
+        maxlength: [20, 'A campaign name must have less or equal 20 characters'],
+        minlength: [5, 'A campaign name must have more or equal 5 characters']
     },
     description: {
         type: String,
-        required: true
+        required: [true, 'A campaign must have a description'],
+        unique: true,
+        trim: true,
     },
-    createdAt: {
-        type: Date,
-        default: new Date()
-    },
-    slug: {
+    image: {
         type: String,
-        required: true,
-        unique: true
+        required: [true, 'A campaign must have an Image'],
+        unique: true,
+        trim: true,
     },
-    sanitizedHtml: {
-        type: String,
-        required: true
+    documents: {
+        type: [String],
+        required: [true, 'A campaign must have a Document for reference'],
     },
-    organizer: {
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        },
-        username: String
-    }    
-});
+    amountToRaise: {
+        type: Number,
+        required: [true, 'A campaign must have an amount']
+    },
+    slug: String,
+    user: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        required: [true, 'A campaign must belong to a user']
+    }
+},
+    {
+        timestamps: true,
+    }
+);
 
-campaignSchema.pre("validate", function(next){
-    if(this.title){
-        this.slug = slugify(this.title, { lower: true, strict: true })
-    }
-    if(this.caption){
-        this.sanitizedCaption = dompurify.sanitize(marked(this.caption));
-    }
-
-    if(this.description){
-        this.sanitizedHtml = dompurify.sanitize(marked(this.content));
-    }
+// DOCUMENT MIDDLEWARE: runs before .save() and .create()
+campaignSchema.pre('save', function (next) {
+    this.slug = slugify(this.title, { lower: true });
     next();
 });
 
-module.exports = mongoose.model("Article", articleSchema);
+// Define the Campaign Model
+const Campaign = mongoose.model('Campaign', campaignSchema);
+
+module.exports = Campaign;

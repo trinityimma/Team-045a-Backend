@@ -1,44 +1,68 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const validator = require('validator');
 
-const userRoles = Object.freeze({
-    Admin: 'admin',
-    Caimpaigner: 'campainer',
-    Normal: 'normal',
-  });
 
- const userSchema = new mongoose.Schema({
-    username:{
-        type: String
-    },
-    password: {
-        type: String,
-        required: true
-    },
+const userSchema = new mongoose.Schema({
+
     firstName: {
         type: String,
+        required: [true, 'please tell us your First Name'],
     },
     lastName: {
         type: String,
+        required: [true, 'please tell us your Last Name'],
+    },
+    username: {
+        type: String,
+        default: 'user-xxx-name'
+    },
+    phoneNumber: {
+        type: String,
+        // required: [true, 'please provide a phone number'],
     },
     email: {
         type: String,
-        required: true
+        required: [true, 'Please provide an Email'],
+        unique: true,
+        lowercase: true,
+        // Using the validator installed
+        validate: [validator.isEmail, 'Please provide a valid email']
     },
-    userRole: {
+    photo: {
         type: String,
-        enum: Object.values(userRoles),
+        default: 'default.jpg'
     },
-    phoneNumber: {
-        type: String
+    role: {
+        type: String,
+        enum: ['user', 'moderator', 'admin'],
+        default: 'user'
     },
-    dateJoined: {
-        type: Date, 
-        default: new Date()
+    password: {
+        type: String,
+        required: [true, 'Please provide a password'],
+        minlength: [8, 'Please provide a password with minimum length of 8'],
+        // Make the password never show up for any get request
+        // select: false
     },
-});
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
+    active: {
+        type: Boolean,
+        default: true,
+    },
+    campaign: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Campaign',
+        // required: [true, 'A campaign is unique to a User']
+    }
+}, {
+    timestamps: true
+}
+);
 
-Object.assign(userSchema.statics, {
-    userRoles,
-});
 
-module.exports = mongoose.model("User", userSchema);
+// define the User Model
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;
